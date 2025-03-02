@@ -1,4 +1,4 @@
-package dev.bradcodecraft.app.TidyTasks.User;
+package dev.bradcodecraft.app.TidyTasks.User.Exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
