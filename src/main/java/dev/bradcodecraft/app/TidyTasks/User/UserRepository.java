@@ -40,6 +40,15 @@ public class UserRepository {
   }
 
   // UPDATE
-  //
+  public void updateById(Integer userId, User user) {
+    Integer status = this.jdbcClient.sql(
+        "UPDATE \"user\" SET user_name = ?, user_password = ?, user_email = ?, user_join_date = ? WHERE user_id = ?")
+        .params(
+            List.of(user.getUserName(), user.getUserPassword(), user.getUserEmail(), user.getUserJoinDate(), userId))
+        .update();
+
+    Assert.state(status == 1, "Failed to update user " + userId);
+  }
+
   // DELETE
 }

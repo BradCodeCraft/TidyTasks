@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +52,16 @@ public class UserController {
   }
 
   // UPDATE
-  //
+  @PutMapping("/{userId}")
+  public void updateById(@PathVariable Integer userId, @RequestBody User user) {
+    Optional<User> optionalUser = this.userRepository.readById(userId);
+
+    if (optionalUser.isEmpty()) {
+      throw new UserNotFoundException();
+    } else {
+      this.userRepository.updateById(userId, user);
+    }
+  }
+
   // DELETE
 }
