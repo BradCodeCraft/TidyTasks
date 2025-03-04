@@ -3,6 +3,7 @@ package dev.bradcodecraft.app.TidyTasks.User;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,4 +65,14 @@ public class UserController {
   }
 
   // DELETE
+  @DeleteMapping("/{userId}")
+  public void deleteById(@PathVariable Integer userId) {
+    Optional<User> optionalUser = this.userRepository.readById(userId);
+
+    if (optionalUser.isEmpty()) {
+      throw new UserNotFoundException();
+    } else {
+      this.userRepository.deleteById(userId);
+    }
+  }
 }

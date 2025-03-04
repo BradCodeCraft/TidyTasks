@@ -51,4 +51,11 @@ public class UserRepository {
   }
 
   // DELETE
+  public void deleteById(Integer userId) {
+    Integer status = this.jdbcClient.sql("DELETE FROM \"user\" WHERE user_id = ?")
+        .param(userId)
+        .update();
+
+    Assert.state(status == 1, "Failed to delete user " + userId);
+  }
 }
